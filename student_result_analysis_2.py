@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 #-----------------------------------
 # Student Information
 #-----------------------------------
@@ -54,3 +55,57 @@ for i in range(len(students)):
         row = row + f"{mark:12}"
     print(row)
     
+######### Best Formating ########
+# Create DataFrame with students as a column from the start
+print("-"*80)
+print("Table formating with padas library")
+data_frame = pd.DataFrame(marks, index=students, columns=subjects)
+data_frame.insert(0, 'Student Name', students)#inset name as first column
+print(data_frame.to_string(index=False))
+
+#Calculate the total marks for every student
+#axis=1 means perform the calculation across each row
+total = np.sum(marks, axis=1)
+#Calculate the average marks for every student
+average = np.mean(marks, axis=1)
+#Calculate the percentage
+percentage = total/(len(subjects)*100) *100
+
+# Display results with formatting
+print("="*70)
+print("Student Performance Analysis")
+print("="*70)
+print(f"{'Student':<12} {'Total':<12} {'Average':<12} {'percentage'}")
+#Display each student's result
+for i in range(len(students)):
+    print(f"{students[i]:<12} {total[i]:<12} {average[i]:<12.2f} {percentage[i]:5.2f}%")
+
+#Grade function
+def grade(avg):
+    if avg >= 90:
+        return "A+"
+    elif avg >= 80:
+        return "A"
+    elif avg > 70:
+        return "B"
+    elif avg >= 60:
+        return "C"
+    elif avg >= 50:
+        return "D"
+    else:
+        return "F"
+
+#Student Report 
+print("\n")
+print("=" * 70)
+print("STUDENT REPORT")
+print("=" * 70)
+
+for i in range(len(students)):
+    print(f"""
+    Student:{i+1}     :{students[i]}
+    Total       : {total[i]}
+    Average     :{average[i]}
+    Percentage  :{percentage[i]}
+    Grade       :{grade(average[i])}
+    """)
