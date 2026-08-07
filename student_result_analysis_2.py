@@ -104,8 +104,8 @@ print("=" * 70)
 for i in range(len(students)):
     print(f"""
     Student:{i+1}     :{students[i]}
-    Total       : {total[i]}
-    Average     :{average[i]}
-    Percentage  :{percentage[i]}
-    Grade       :{grade(average[i])}
+    Total         :{total[i]}
+    Average       :{average[i]}
+    Percentage    :{percentage[i]:.2f}
+    Grade         :{grade(average[i])}
     """)
